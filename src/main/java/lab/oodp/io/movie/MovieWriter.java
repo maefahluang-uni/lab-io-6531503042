@@ -9,7 +9,6 @@ import lab.oodp.Keyboard;
 public class MovieWriter {
 	String fileName = null;
 	
-
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
