@@ -49,11 +49,25 @@ public class MovieReader {
      * @return
      */
     public Movie[] loadMovies(String fileName) {
-    	//TODO: remove return null below, load movies from data file, 
-        
-    	return null;
-
+        try {
+            DataInputStream input = new DataInputStream(new FileInputStream(fileName));
+            int numMovies = input.readInt();
+            Movie[] movies = new Movie[numMovies];
+            for (int i = 0; i < numMovies; i++) {
+                String name = input.readUTF();
+                int year = input.readInt();
+                int lengthInMinutes = input.readInt();
+                String director = input.readUTF();
+                movies[i] = new Movie(name, year, lengthInMinutes, director);
+            }
+            input.close();
+            return movies;
+        } catch (IOException e) {
+            System.err.println("Error reading from file: " + e.getMessage());
+            return null;
+        }
     }
+    
 
     private void printMoviesArray(Movie[] films) {
         System.out.println("Movie Collection");

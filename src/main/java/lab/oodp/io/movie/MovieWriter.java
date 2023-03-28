@@ -33,11 +33,30 @@ public class MovieWriter {
 	 * Saves the movies to the given file.
 	 */
 	protected void saveMovies(String fileName, Movie[] films) {
-		// TODO: save array of movies: films into a file, uncomment sysout below
-		
-
-		//System.out.println("Movies saved successfully to " + fileName + "!");
+		try {
+			// Create a DataOutputStream to write binary data to the file
+			DataOutputStream out = new DataOutputStream(new FileOutputStream(fileName));
+	
+			// Write the number of movies to the file
+			out.writeInt(films.length);
+	
+			// Loop through the movies and write their properties to the file
+			for (int i = 0; i < films.length; i++) {
+				out.writeUTF(films[i].getName());
+				out.writeInt(films[i].getYear());
+				out.writeInt(films[i].getLengthInMinutes());
+				out.writeUTF(films[i].getDirector());
+			}
+	
+			// Close the output stream
+			out.close();
+	
+			System.out.println("Movies saved successfully to " + fileName + "!");
+		} catch (IOException e) {
+			System.err.println("Error saving movies: " + e.getMessage());
+		}
 	}
+	
 
 	/**
 	 * Returns an array with a bunch of hard-coded movie data
