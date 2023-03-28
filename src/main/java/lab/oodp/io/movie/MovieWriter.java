@@ -46,6 +46,7 @@ public class MovieWriter {
 				out.writeInt(films[i].getLengthInMinutes());
 				out.writeUTF(films[i].getDirector());
 			}
+			// Close the output stream
 	
 			// Close the output stream
 			out.close();
